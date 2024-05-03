@@ -8,9 +8,6 @@
     <h1 class="font-extrablack text-3xl">
         Discover Anime <br /> Based on Your Mood
     </h1>
-    <div class="font-bold flex gap-2 justify-center">
-        <span>😍</span> Horny
-    </div>
 </section>
 
 <section class="mt-16">
