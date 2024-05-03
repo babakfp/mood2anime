@@ -1,4 +1,5 @@
 <script lang="ts">
+    import moods from "$lib/moods.json"
     import MoodCard from "$lib/components/MoodCard.svelte"
 </script>
 
@@ -14,10 +15,16 @@
 
 <section class="mt-16">
     <h2 class="text-3xl font-black text-center">I feel?</h2>
-    <ul class="mt-4">
-        <li>
-            <MoodCard name="Horny" emoji="😈" href="/horny" />
-        </li>
+    <ul class="mt-4 space-y-2">
+        {#each moods as mood}
+            <li>
+                <MoodCard
+                    name={mood.name}
+                    emoji={mood.emoji}
+                    href="/mood/{mood.id}"
+                />
+            </li>
+        {/each}
     </ul>
 </section>
 
