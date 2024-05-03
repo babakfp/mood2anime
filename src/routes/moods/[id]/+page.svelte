@@ -7,6 +7,6 @@
 {#each data.anime as anime}
     <div>
         <a href={anime.url}>{anime.title}</a>
-        <img src={anime.images.jpg.image_url} />
+        <img src={anime.images.jpg.image_url} alt="" />
     </div>
 {/each}

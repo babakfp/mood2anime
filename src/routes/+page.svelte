@@ -5,10 +5,11 @@
 </script>
 
 <div class="container grid min-h-screen items-start gap-16 py-8">
-    <div class="space-y-4 text-center">
+    <div class="text-white space-y-4 text-center">
         <div class="font-bubblegum">Mood2Anime</div>
         <h1 class="text-3xl font-extrablack">
-            Discover Anime <br /> Based on Your Mood
+            Discover Anime <br /> Based on Your
+            <span class="underline decoration-wavy">Mood</span>
         </h1>
     </div>
 
@@ -23,21 +24,20 @@
                     <MoodCard
                         name={mood.name}
                         emoji={mood.emoji}
-                        href="/mood/{mood.id}"
+                        href="/moods/{mood.id}"
                     />
-                    <div class="text-2xs">
-                        Categories:
+                    <div class="mt-2 flex gap-1">
                         {#each moodGenres as genre, i}
                             {@const useComma =
                                 i < moodGenres.length &&
                                 i !== moodGenres.length - 1}
                             <a
-                                class="underline"
+                                class="link badge badge-neutral text-2xs"
                                 href={genre.url}
                                 target="_blank"
                             >
-                                {genre.name}</a
-                            >{useComma ? ", " : ""}
+                                {genre.name}
+                            </a>
                         {/each}
                     </div>
                 </li>
@@ -48,7 +48,7 @@
     <footer class="self-end text-center">
         Made with ❤️ by
         <a
-            class="font-bold text-primary underline hover:text-primary-light"
+            class="link link-primary font-bold"
             href="https://github.com/babakfp"
             target="_blank"
         >
