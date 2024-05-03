@@ -5,7 +5,7 @@
 </script>
 
 <div class="container pb-16 pt-8">
-    <h1>Mood: {data.name}</h1>
+    <h1>Mood: {data.mood.name}</h1>
 
     <br />
 

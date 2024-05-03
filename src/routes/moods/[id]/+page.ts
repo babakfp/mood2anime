@@ -11,38 +11,23 @@ export const load = async ({ params }) => {
     }
 
     const url = new URL("https://api.jikan.moe/v4/anime")
-    // url.searchParams.append("genres", mood.genres.join(","))
+
+    url.searchParams.append("genres", mood.genres.join(","))
     url.searchParams.append("limit", "25")
-    url.searchParams.append("min_score", "7") // TODO: Maybe change it to 8.
+    url.searchParams.append("min_score", "7")
     url.searchParams.append("order_by", "score")
     url.searchParams.append("sort", "desc")
     url.searchParams.append("page", "1")
     // url.searchParams.append("sfw", "true")
     // url.searchParams.append("rating", "rx")
-    url.searchParams.append("type", "tv_special")
     // url.searchParams.append("end_date", "2018-01-01")
 
     const res = await fetch(url)
     const result = await res.json()
 
-    // if (result.error) {
-    //     console.dir(result)
-
-    //     if (result.type === "ValidationException") {
-    //         return error(result.status, result.messages.limit[0])
-    //     }
-
-    //     return error(
-    //         result.status,
-    //         result.message || result.messages.toString(),
-    //     )
-    // }
-
-    // console.log("result", result)
-
     result.data = result.data.filter(
         (a: any) => EXCLUDED_TYPES.includes(a.type) === false,
     )
 
-    return { name: mood.name, anime: result.data }
+    return { mood, anime: result.data }
 }
