@@ -15,7 +15,7 @@
 
 <section class="mt-16">
     <h2 class="text-3xl font-black text-center">I feel?</h2>
-    <ul class="mt-4 space-y-2">
+    <ul class="mt-6 space-y-2">
         {#each moods as mood}
             <li>
                 <MoodCard
