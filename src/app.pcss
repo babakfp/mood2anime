@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    .link {
-        @apply text-primary hover:text-primary-light underline font-bold;
-    }
-}
-
 @layer utilities {
     .font-recursive-casual {
         font-variation-settings: "CASL" 1, "CRSV" 1;
+    }
+
+    .link {
+        @apply text-primary hover:text-primary-light underline font-bold;
     }
 }
