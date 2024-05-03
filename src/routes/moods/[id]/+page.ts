@@ -1,24 +1,48 @@
 import { moods } from "$lib/data/moods"
 import { error } from "@sveltejs/kit"
 
+const EXCLUDED_TYPES = ["OVA", "Special", "CM", "PV", "TV Special"]
+
 export const load = async ({ params }) => {
     const mood = moods.find((mood) => mood.id === Number(params.id))
 
     if (!mood) {
         return error(404)
     }
-    // console.log(mood.genres)
 
     const url = new URL("https://api.jikan.moe/v4/anime")
-    url.searchParams.append("genres", mood.genres.join(","))
-    url.searchParams.append("min_score", "6")
+    // url.searchParams.append("genres", mood.genres.join(","))
+    url.searchParams.append("limit", "25")
+    url.searchParams.append("min_score", "7") // TODO: Maybe change it to 8.
     url.searchParams.append("order_by", "score")
     url.searchParams.append("sort", "desc")
-    // url.searchParams.append("sfw", "false")
+    url.searchParams.append("page", "1")
+    // url.searchParams.append("sfw", "true")
     // url.searchParams.append("rating", "rx")
+    url.searchParams.append("type", "tv_special")
+    // url.searchParams.append("end_date", "2018-01-01")
 
     const res = await fetch(url)
-    const anime = await res.json()
+    const result = await res.json()
 
-    return { name: mood.name, anime: anime.data }
+    // if (result.error) {
+    //     console.dir(result)
+
+    //     if (result.type === "ValidationException") {
+    //         return error(result.status, result.messages.limit[0])
+    //     }
+
+    //     return error(
+    //         result.status,
+    //         result.message || result.messages.toString(),
+    //     )
+    // }
+
+    // console.log("result", result)
+
+    result.data = result.data.filter(
+        (a: any) => EXCLUDED_TYPES.includes(a.type) === false,
+    )
+
+    return { name: mood.name, anime: result.data }
 }

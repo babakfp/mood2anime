@@ -1,12 +1,23 @@
 <script lang="ts">
+    import AnimeCard from "$lib/components/AnimeCard.svelte"
+
     export let data
 </script>
 
-<h1>Mood: {data.name}</h1>
+<div class="container pb-16 pt-8">
+    <h1>Mood: {data.name}</h1>
 
-{#each data.anime as anime}
-    <div>
-        <a href={anime.url}>{anime.title}</a>
-        <img src={anime.images.jpg.image_url} alt="" />
-    </div>
-{/each}
+    <br />
+
+    <ul class="grid grid-cols-[repeat(auto-fill,minmax(9rem,1fr))] gap-6">
+        {#each data.anime as anime}
+            <li class="flex justify-center">
+                <AnimeCard
+                    url={anime.url}
+                    title={anime.title}
+                    imageUrl={anime.images.jpg.image_url}
+                />
+            </li>
+        {/each}
+    </ul>
+</div>
