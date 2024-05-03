@@ -2,7 +2,9 @@
     export let data
 </script>
 
-{#each data.anime.data as anime}
+<h1>Mood: {data.name}</h1>
+
+{#each data.anime as anime}
     <div>
         <a href={anime.url}>{anime.title}</a>
         <img src={anime.images.jpg.image_url} />

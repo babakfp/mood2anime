@@ -1,4 +1,4 @@
-import moods from "$lib/moods.json"
+import { moods } from "$lib/data/moods"
 import { error } from "@sveltejs/kit"
 
 export const load = async ({ params }) => {
@@ -12,7 +12,7 @@ export const load = async ({ params }) => {
     const url = new URL("https://api.jikan.moe/v4/anime")
     url.searchParams.append("genres", mood.genres.join(","))
     url.searchParams.append("min_score", "6")
-    // url.searchParams.append("order_by", "score")
+    url.searchParams.append("order_by", "score")
     url.searchParams.append("sort", "desc")
     // url.searchParams.append("sfw", "false")
     // url.searchParams.append("rating", "rx")
@@ -20,5 +20,5 @@ export const load = async ({ params }) => {
     const res = await fetch(url)
     const anime = await res.json()
 
-    return { anime }
+    return { name: mood.name, anime: anime.data }
 }
