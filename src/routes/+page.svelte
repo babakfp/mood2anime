@@ -28,7 +28,7 @@
     </ul>
 </section>
 
-<footer class="fixed bottom-8 px-4 w-full inset-x-center">
+<footer class="mb-8 mt-16 grid self-end">
     <p class="text-center">
         Made with ❤️ by
         <a class="link" href="https://github.com/babakfp" target="_blank">
