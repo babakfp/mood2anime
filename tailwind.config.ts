@@ -1,12 +1,13 @@
+import type { Config } from "tailwindcss"
 import colors from "tailwindcss/colors"
+import tailwindcssAddons from "tailwindcss-addons"
 
-/** @type {import("tailwindcss").Config} */
 export default {
     content: ["./src/**/*.{html,js,svelte,ts}"],
     theme: {
         extend: {
             fontWeight: {
-                extrablack: 1000,
+                extrablack: "1000",
             },
         },
         colors: {
@@ -25,4 +26,5 @@ export default {
             padding: "1rem",
         },
     },
-}
+    plugins: [...tailwindcssAddons()],
+} satisfies Config
