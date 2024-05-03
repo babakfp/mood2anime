@@ -10,9 +10,16 @@ export const load = async ({ params }) => {
         return error(404)
     }
 
+    const genresRes = await fetch("https://api.jikan.moe/v4/genres/anime")
+    const genresResult = await genresRes.json()
+    const genreIds = genresResult.data.map((g: any) => g.mal_id)
+    const excludedGenreIds = genreIds.filter(
+        (g: any) => !mood.genres.includes(g),
+    )
+
     const url = new URL("https://api.jikan.moe/v4/anime")
 
-    url.searchParams.append("genres", mood.genres.join(","))
+    url.searchParams.append("genres_exclude", excludedGenreIds.join(","))
     url.searchParams.append("limit", "25")
     url.searchParams.append("min_score", "7")
     url.searchParams.append("order_by", "score")
