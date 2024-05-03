@@ -28,7 +28,11 @@
 <footer class="mb-8 mt-16 grid self-end">
     <p class="text-center">
         Made with ❤️ by
-        <a class="link" href="https://github.com/babakfp" target="_blank">
+        <a
+            class="text-primary hover:text-primary-light underline font-bold"
+            href="https://github.com/babakfp"
+            target="_blank"
+        >
             Babak
         </a>
     </p>
