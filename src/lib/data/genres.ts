@@ -1,9 +1,7 @@
-export type Genre = {
-    mal_id: number
-    name: string
-    url: string
+import type { Genre as ApiGenre } from "../types"
+
+export type Genre = ApiGenre & {
     wikiUrl?: string
-    count: number
 }
 
 export const genres: Genre[] = [

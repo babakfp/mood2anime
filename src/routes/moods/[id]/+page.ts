@@ -1,7 +1,14 @@
 import { moods } from "$lib/data/moods"
+import type { Anime, GetAnimeSearch } from "$lib/types.js"
 import { error } from "@sveltejs/kit"
 
-const EXCLUDED_TYPES = ["OVA", "Special", "CM", "PV", "TV Special"]
+const EXCLUDED_TYPES = [
+    "OVA",
+    "Special",
+    "CM",
+    "PV",
+    "TV Special",
+] satisfies Anime["type"][]
 
 export const load = async ({ params, fetch }) => {
     const mood = moods.find((mood) => mood.id === Number(params.id))
@@ -10,17 +17,21 @@ export const load = async ({ params, fetch }) => {
         return error(404)
     }
 
-    const data = await fetchAnimeByGenres(mood.genres)
+    const data = await fetchAnimeByGenres(fetch, mood.genres)
 
     return { mood, anime: data.data }
 }
 
-async function fetchAnimeByGenres(genreIds: number[], page = 1) {
+async function fetchAnimeByGenres(
+    fetch: typeof window.fetch,
+    genreIds: number[],
+    page = 1,
+) {
     const paginations: any[] = []
     const items: any[] = []
 
     for (const id of genreIds) {
-        const animeItems = await fetchAnimeByGenre(id, page)
+        const animeItems = await fetchAnimeByGenre(fetch, id, page)
         paginations.push(animeItems.pagination)
 
         for (const animeItem of animeItems.data) {
@@ -37,7 +48,11 @@ async function fetchAnimeByGenres(genreIds: number[], page = 1) {
     return { paginations, data: items }
 }
 
-async function fetchAnimeByGenre(genreId: number, page = 1) {
+async function fetchAnimeByGenre(
+    fetch: typeof window.fetch,
+    genreId: number,
+    page = 1,
+) {
     const url = new URL("https://api.jikan.moe/v4/anime")
 
     url.searchParams.append("genres", String(genreId))
@@ -46,12 +61,10 @@ async function fetchAnimeByGenre(genreId: number, page = 1) {
     url.searchParams.append("order_by", "score")
     url.searchParams.append("sort", "desc")
     url.searchParams.append("page", String(page))
-    // url.searchParams.append("sfw", "true")
-    // url.searchParams.append("rating", "rx")
 
     try {
         const res = await fetch(url)
-        const data = await res.json()
+        const data: GetAnimeSearch = await res.json()
 
         data.data = data.data.filter((d: any) => {
             return d.trailer.url
