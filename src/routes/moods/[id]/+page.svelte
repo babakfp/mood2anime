@@ -1,12 +1,36 @@
 <script lang="ts">
+    import { enhance } from "$app/forms"
     import { moods } from "$lib/data/moods"
     import MoodCard from "$lib/components/MoodCard.svelte"
 
     export let data
+    export let form
 
     let animeIndex = 0
-    $: anime = data.anime[animeIndex]
+    $: anime = data.data.items[animeIndex]
+    $: canShowMore = data.data.paginations.every((p) => p.has_next_page)
+
+    $: if (form) {
+        data.data.items = [...data.data.items, ...form.items]
+        data.data.paginations = form.paginations
+    }
 </script>
+
+<!-- TODO: REMOVE -->
+<!-- <div class="flex flex-wrap">
+    {#each data.data.items as anm}
+        <a href={anm.url}>
+            <img src={anm.images.webp.image_url} alt={anm.title} />
+            {anm.title}
+            <br />
+            <p>score: {anm.score}</p>
+            <p>scored_by: {anm.scored_by}</p>
+            <p>rank: {anm.rank}</p>
+            <p>popularity: {anm.popularity}</p>
+            <p>favorites: {anm.favorites}</p>
+        </a>
+    {/each}
+</div> -->
 
 <div class="container pb-16 pt-8">
     <header>
@@ -65,17 +89,35 @@
             </ul>
 
             <div class="mt-8 flex gap-4">
-                <button
-                    class="btn btn-primary"
-                    class:btn-disabled={animeIndex === data.anime.length - 1}
-                    on:click={() => {
-                        if (animeIndex < data.anime.length - 1) {
-                            animeIndex += 1
-                        }
-                    }}
-                >
-                    Show next
-                </button>
+                {#if animeIndex < data.data.items.length - 1}
+                    <button
+                        class="btn btn-primary"
+                        class:btn-disabled={animeIndex ===
+                            data.data.items.length - 1}
+                        on:click={() => {
+                            if (animeIndex < data.data.items.length - 1) {
+                                animeIndex += 1
+                            }
+                        }}
+                    >
+                        Show next ({animeIndex + 1} / {data.data.items.length})
+                    </button>
+                {:else}
+                    <form method="post" use:enhance>
+                        <input
+                            type="hidden"
+                            name="current_page"
+                            value={data.data.paginations[0].current_page}
+                        />
+                        <button
+                            class="btn btn-primary"
+                            class:btn-disabled={!canShowMore}
+                        >
+                            Load more
+                        </button>
+                    </form>
+                {/if}
+
                 <button
                     class="btn btn-ghost"
                     class:btn-disabled={animeIndex < 1}

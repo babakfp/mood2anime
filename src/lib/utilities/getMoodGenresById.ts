@@ -1,8 +1,8 @@
-import { moods } from "$lib/data/moods"
 import { genres } from "$lib/data/genres"
+import { getMoodById } from "./getMoodById"
 
 export const getMoodGenresById = (moodId: number) => {
-    const mood = moods.find((mood) => mood.id === moodId)
+    const mood = getMoodById(moodId)
 
     if (!mood) {
         throw new Error("Mood not found")
