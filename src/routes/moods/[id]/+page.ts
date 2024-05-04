@@ -10,31 +10,62 @@ export const load = async ({ params, fetch }) => {
         return error(404)
     }
 
-    const genresRes = await fetch("https://api.jikan.moe/v4/genres/anime")
-    const genresResult = await genresRes.json()
-    const genreIds = genresResult.data.map((g: any) => g.mal_id)
-    const excludedGenreIds = genreIds.filter(
-        (g: any) => !mood.genres.includes(g),
-    )
+    const data = await fetchAnimeByGenres(mood.genres)
 
+    return { mood, anime: data.data }
+}
+
+async function fetchAnimeByGenres(genreIds: number[], page = 1) {
+    const paginations: any[] = []
+    const items: any[] = []
+
+    for (const id of genreIds) {
+        const animeItems = await fetchAnimeByGenre(id, page)
+        paginations.push(animeItems.pagination)
+
+        for (const animeItem of animeItems.data) {
+            const existingItem = items.find(
+                (item) => item.mal_id === animeItem.mal_id,
+            )
+
+            if (!existingItem) {
+                items.push(animeItem)
+            }
+        }
+    }
+
+    return { paginations, data: items }
+}
+
+async function fetchAnimeByGenre(genreId: number, page = 1) {
     const url = new URL("https://api.jikan.moe/v4/anime")
 
-    url.searchParams.append("genres_exclude", excludedGenreIds.join(","))
+    url.searchParams.append("genres", String(genreId))
     url.searchParams.append("limit", "25")
     url.searchParams.append("min_score", "7")
     url.searchParams.append("order_by", "score")
     url.searchParams.append("sort", "desc")
-    url.searchParams.append("page", "1")
+    url.searchParams.append("page", String(page))
     // url.searchParams.append("sfw", "true")
     // url.searchParams.append("rating", "rx")
-    // url.searchParams.append("end_date", "2018-01-01")
 
-    const res = await fetch(url)
-    const result = await res.json()
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
 
-    result.data = result.data.filter(
-        (a: any) => EXCLUDED_TYPES.includes(a.type) === false,
-    )
+        data.data = data.data.filter((d: any) => {
+            return d.trailer.url
+        })
 
-    return { mood, anime: result.data }
+        data.data = data.data.filter(
+            (a: any) =>
+                !EXCLUDED_TYPES.includes(a.type) &&
+                a.rank <= 2000 &&
+                a.favorites > 500,
+        )
+
+        return data
+    } catch (e: any) {
+        return error(e.status, e.message || e.messages.toString())
+    }
 }
