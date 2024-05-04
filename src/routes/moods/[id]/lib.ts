@@ -23,25 +23,31 @@ const fetchAnimeByGenre = async (
     url.searchParams.append("sort", "desc")
     url.searchParams.append("page", String(page))
 
-    try {
-        const res = await fetch(url)
-        const data: GetAnimeSearch = await res.json()
+    const res = await fetch(url)
+    const data: GetAnimeSearch = await res.json()
 
-        data.data = data.data.filter((d: any) => {
-            return d.trailer.url
-        })
+    console.log("//////////////")
 
-        data.data = data.data.filter(
-            (a: any) =>
-                !EXCLUDED_TYPES.includes(a.type) &&
-                a.rank <= 2000 &&
-                a.favorites > 500,
-        )
-
-        return data
-    } catch (e: any) {
-        return error(e.status, e.message || e.messages.toString())
+    // @ts-expect-error
+    if (data.type) {
+        // @ts-expect-error
+        return error(data.status, data.message)
     }
+
+    console.dir(data, { depth: 1 })
+
+    data.data = data.data.filter((d: any) => {
+        return d.trailer.url
+    })
+
+    data.data = data.data.filter(
+        (a: any) =>
+            !EXCLUDED_TYPES.includes(a.type) &&
+            a.rank <= 2000 &&
+            a.favorites > 500,
+    )
+
+    return data
 }
 
 export const fetchAnimeByGenres = async (

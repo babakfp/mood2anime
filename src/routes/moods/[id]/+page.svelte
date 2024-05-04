@@ -43,16 +43,19 @@
     </header>
 
     <div class="mt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div
+            class="fixed inset-y-0 left-0 right-1/2 hidden bg-primary-content/25 lg:block"
+        />
         <div class="lg:sticky lg:top-8 lg:self-start">
+            <h1 class="text-2xl font-bold text-white">
+                {anime.title}
+            </h1>
+
             <img
-                class="w-full rounded-xl"
+                class="mt-4 w-full rounded-xl sm:h-80 sm:w-auto"
                 src={anime.images.webp.image_url}
                 alt={anime.title}
             />
-
-            <h1 class="mt-4 text-3xl font-extrablack text-white">
-                {anime.title}
-            </h1>
 
             <ul class="mt-4 flex flex-wrap gap-1">
                 {#each anime.genres as genre}
