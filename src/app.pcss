@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    .container {
+        @apply md:!max-w-screen-md;
+    }
+}
+
 @layer utilities {
     .font-recursive-casual {
         font-variation-settings:
@@ -12,6 +18,10 @@
 
 .badge.link {
     @apply hover:bg-opacity-50;
+}
+
+a.link {
+    @apply hover:opacity-50;
 }
 
 a.bg-primary-content {

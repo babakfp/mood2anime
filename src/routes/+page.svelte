@@ -1,6 +1,5 @@
 <script lang="ts">
     import { moods } from "$lib/data/moods"
-    import { getMoodGenresById } from "$lib/utilities/getMoodGenresById"
     import MoodCard from "$lib/components/MoodCard.svelte"
 </script>
 
@@ -15,25 +14,15 @@
 
     <div>
         <h2 class="text-center text-2xl font-bold">I'm in the mood of?</h2>
-        <ul class="mt-6 space-y-2">
+        <ul class="mx-auto mt-6 max-w-96 space-y-2">
             {#each moods as mood}
                 <li>
                     <MoodCard
+                        id={mood.id}
                         name={mood.name}
                         emoji={mood.emoji}
                         href="/moods/{mood.id}"
                     />
-                    <div class="mt-2 flex gap-1">
-                        {#each getMoodGenresById(mood.id) as genre}
-                            <a
-                                class="badge link badge-neutral text-2xs"
-                                href={genre.url}
-                                target="_blank"
-                            >
-                                {genre.name}
-                            </a>
-                        {/each}
-                    </div>
                 </li>
             {/each}
         </ul>

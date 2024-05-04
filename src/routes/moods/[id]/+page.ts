@@ -3,7 +3,7 @@ import { error } from "@sveltejs/kit"
 
 const EXCLUDED_TYPES = ["OVA", "Special", "CM", "PV", "TV Special"]
 
-export const load = async ({ params }) => {
+export const load = async ({ params, fetch }) => {
     const mood = moods.find((mood) => mood.id === Number(params.id))
 
     if (!mood) {
