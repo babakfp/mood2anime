@@ -2,6 +2,7 @@ export type Genre = {
     mal_id: number
     name: string
     url: string
+    wikiUrl?: string
     count: number
 }
 
@@ -439,27 +440,17 @@ export const genres: Genre[] = [
         count: 152,
     },
     {
-        mal_id: 15,
-        name: "Kids",
-        url: "https://myanimelist.net/anime/genre/15/Kids",
-        count: 6489,
-    },
-    {
         mal_id: 42,
         name: "Seinen",
         url: "https://myanimelist.net/anime/genre/42/Seinen",
+        wikiUrl: "https://en.wikipedia.org/wiki/Seinen_manga",
         count: 1013,
-    },
-    {
-        mal_id: 25,
-        name: "Shoujo",
-        url: "https://myanimelist.net/anime/genre/25/Shoujo",
-        count: 489,
     },
     {
         mal_id: 27,
         name: "Shounen",
         url: "https://myanimelist.net/anime/genre/27/Shounen",
+        wikiUrl: "https://en.wikipedia.org/wiki/Sh%C5%8Dnen_manga",
         count: 1955,
     },
 ]

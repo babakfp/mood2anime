@@ -94,9 +94,9 @@ export const moods: Mood[] = [
     },
     {
         id: 14,
-        name: "Childlike Wonder",
-        emoji: "👧🧒",
-        genres: [15, 53],
+        name: "Cute Kids",
+        emoji: "😻",
+        genres: [53],
     },
     {
         id: 15,
