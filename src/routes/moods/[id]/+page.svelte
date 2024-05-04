@@ -4,9 +4,8 @@
 
     export let data
 
-    console.log(data.anime)
-
-    const anime = data.anime[0]
+    let animeIndex = 0
+    $: anime = data.anime[animeIndex]
 </script>
 
 <div class="container pb-16 pt-8">
@@ -19,7 +18,7 @@
         </a>
     </header>
 
-    <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-16">
+    <div class="mt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
         <div class="lg:sticky lg:top-8 lg:self-start">
             <img
                 class="w-full rounded-xl"
@@ -65,7 +64,30 @@
                 </li>
             </ul>
 
-            <button class="btn btn-primary mt-8">Show Another</button>
+            <div class="mt-8 flex gap-4">
+                <button
+                    class="btn btn-primary"
+                    class:btn-disabled={animeIndex === data.anime.length - 1}
+                    on:click={() => {
+                        if (animeIndex < data.anime.length - 1) {
+                            animeIndex += 1
+                        }
+                    }}
+                >
+                    Show next
+                </button>
+                <button
+                    class="btn btn-ghost"
+                    class:btn-disabled={animeIndex < 1}
+                    on:click={() => {
+                        if (animeIndex > 0) {
+                            animeIndex -= 1
+                        }
+                    }}
+                >
+                    Show previous
+                </button>
+            </div>
         </div>
 
         <ul class="hidden space-y-2 lg:block">
