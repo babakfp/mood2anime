@@ -1,11 +1,11 @@
 <script lang="ts">
     import { moods } from "$lib/data/moods"
-    import { genres } from "$lib/data/genres"
+    import { getMoodGenresById } from "$lib/utilities/getMoodGenresById"
     import MoodCard from "$lib/components/MoodCard.svelte"
 </script>
 
 <div class="container grid min-h-screen items-start gap-16 py-8">
-    <div class="text-white space-y-4 text-center">
+    <div class="space-y-4 text-center text-white">
         <div class="font-bubblegum">Mood2Anime</div>
         <h1 class="text-3xl font-extrablack">
             Discover Anime <br /> Based on Your
@@ -17,9 +17,6 @@
         <h2 class="text-center text-2xl font-bold">I'm in the mood of?</h2>
         <ul class="mt-6 space-y-2">
             {#each moods as mood}
-                {@const moodGenres = genres.filter((genre) =>
-                    mood.genres.includes(genre.mal_id),
-                )}
                 <li>
                     <MoodCard
                         name={mood.name}
@@ -27,12 +24,9 @@
                         href="/moods/{mood.id}"
                     />
                     <div class="mt-2 flex gap-1">
-                        {#each moodGenres as genre, i}
-                            {@const useComma =
-                                i < moodGenres.length &&
-                                i !== moodGenres.length - 1}
+                        {#each getMoodGenresById(mood.id) as genre}
                             <a
-                                class="link badge badge-neutral text-2xs"
+                                class="badge link badge-neutral text-2xs"
                                 href={genre.url}
                                 target="_blank"
                             >
