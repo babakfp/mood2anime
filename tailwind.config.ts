@@ -20,4 +20,5 @@ export default {
         },
     },
     plugins: [...tailwindcssAddons(), daisyui],
+    daisyui: { logs: false },
 } satisfies Config
