@@ -8,6 +8,8 @@
         "format": "prettier -w ."
     },
     "devDependencies": {
+        "@fontsource-variable/recursive": "5.0.18",
+        "@fontsource/bubblegum-sans": "5.0.20",
         "@sveltejs/adapter-vercel": "5.3.0",
         "@sveltejs/kit": "2.5.7",
         "@sveltejs/vite-plugin-svelte": "3.1.0",

@@ -11,7 +11,7 @@ export default {
             },
         },
         fontFamily: {
-            sans: ["Recursive"],
+            sans: ["Recursive Variable"],
             bubblegum: ["Bubblegum Sans"],
         },
         container: {
