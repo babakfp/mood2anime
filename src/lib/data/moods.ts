@@ -119,12 +119,6 @@ export const moods: Mood[] = [
         genres: [19, 70],
     },
     {
-        id: 18,
-        name: "Parodic Chuckles",
-        emoji: "😜",
-        genres: [20, 57],
-    },
-    {
         id: 19,
         name: "Honoring Samurai Spirit",
         emoji: "⚔️",
