@@ -26,15 +26,11 @@ const fetchAnimeByGenre = async (
     const res = await fetch(url)
     const data: GetAnimeSearch = await res.json()
 
-    console.log("//////////////")
-
     // @ts-expect-error
     if (data.type) {
         // @ts-expect-error
         return error(data.status, data.message)
     }
-
-    console.dir(data, { depth: 1 })
 
     data.data = data.data.filter((d: any) => {
         return d.trailer.url
