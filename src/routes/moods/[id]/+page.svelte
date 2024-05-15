@@ -52,7 +52,7 @@
             </h1>
 
             <img
-                class="mt-4 w-full rounded-xl sm:h-80 sm:w-auto"
+                class="xs:h-80 xs:w-auto mt-4 w-full rounded-xl"
                 src={anime.images.webp.image_url}
                 alt={anime.title}
             />
