@@ -44,7 +44,7 @@
 
     <div class="mt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
         <div
-            class="fixed inset-y-0 left-0 right-1/2 hidden bg-primary-content/25 lg:block"
+            class="fixed inset-y-0 left-0 right-1/2 -z-1 hidden bg-primary-content/25 lg:block"
         />
         <div class="lg:sticky lg:top-8 lg:self-start">
             <h1 class="text-2xl font-bold text-white">
