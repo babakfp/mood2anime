@@ -60,7 +60,9 @@
             </ul>
 
             <ul class="mt-4 list-inside list-disc">
-                <li>Score: {anime.score} ({anime.scored_by})</li>
+                <li>
+                    Score: {anime.score}
+                </li>
                 {#if anime.trailer.url}
                     <li>
                         <a
