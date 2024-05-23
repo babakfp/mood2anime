@@ -16,22 +16,6 @@
     }
 </script>
 
-<!-- TODO: REMOVE -->
-<!-- <div class="flex flex-wrap">
-    {#each data.data.items as anm}
-        <a href={anm.url}>
-            <img src={anm.images.webp.image_url} alt={anm.title} />
-            {anm.title}
-            <br />
-            <p>score: {anm.score}</p>
-            <p>scored_by: {anm.scored_by}</p>
-            <p>rank: {anm.rank}</p>
-            <p>popularity: {anm.popularity}</p>
-            <p>favorites: {anm.favorites}</p>
-        </a>
-    {/each}
-</div> -->
-
 <div class="container pb-16 pt-8">
     <header>
         <a

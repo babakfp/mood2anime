@@ -13,8 +13,6 @@ export const moods: Mood[] = [
         name: "Eager for Action",
         emoji: "💥",
         genres: [1, 17, 18],
-        // TODO: REMOVE
-        // genres: [1],
     },
     {
         id: 2,
