@@ -16,6 +16,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Mood: {data.mood.emoji} {data.mood.name} - Mood2Anime</title>
+</svelte:head>
+
 <div class="container pb-16 pt-8">
     <header>
         <a
