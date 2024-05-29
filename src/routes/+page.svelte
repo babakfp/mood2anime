@@ -29,13 +29,20 @@
     </div>
 
     <footer class="self-end text-center">
-        Made with ❤️ by
-        <a
-            class="link link-primary font-bold"
-            href="https://github.com/babakfp"
-            target="_blank"
-        >
-            Babak
-        </a>
+        <p>
+            Made with ❤️ by
+            <a
+                class="link link-primary font-bold"
+                href="https://github.com/babakfp"
+                target="_blank"
+            >
+                Babak
+            </a>
+        </p>
+
+        <p class="text-sm">
+            Favicon by
+            <a class="link" href="https://icons8.com" target="_blank">Icon8</a>.
+        </p>
     </footer>
 </div>
